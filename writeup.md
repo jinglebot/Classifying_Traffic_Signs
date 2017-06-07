@@ -1,13 +1,9 @@
-#**Traffic Sign Recognition**
+# Traffic Sign Recognition
 
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
----
+## Writeup Template
 
 **Build a Traffic Sign Recognition Project**
-
+---
 The goals / steps of this project are the following:
 * Load the data set (see below for links to the project data set)
 * Explore, summarize and visualize the data set
@@ -39,25 +35,19 @@ The goals / steps of this project are the following:
 
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.
-Files Submitted
+### Files Submitted
 [iPython Notebook](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/Traffic_Sign_Classifier.ipynb)
 [iPython Notebook HTML version](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/Traffic_Sign_Classifier.ipynb)
-[Write-up](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/writeup.md)
+[Writeup](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/writeup.md)
 
 ---
-###Writeup / README
+### Writeup / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
+#### 1. Here is a link to my [project code](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/Traffic_Sign_Classifier.ipynb)
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+### Data Set Summary & Exploration
 
-###Data Set Summary & Exploration
-
-####1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
-
-I used the python library to calculate summary statistics of the traffic
-signs data set:
+#### 1. I used the python library to calculate summary statistics of the traffic signs data set:
 
 * The size of training set is 34,799.
 * The size of the validation set is 4,410.
@@ -65,19 +55,17 @@ signs data set:
 * The shape of a traffic sign image is (32, 32, 3).
 * The number of unique classes/labels in the data set is 43.
 
-####2. Include an exploratory visualization of the dataset.
-
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+#### 2. Here is an exploratory visualization of the data set. It is a bar chart showing how the data is distributed among the sign classes.
 
 ![Dataset Visualization][image1]
 
-###Design and Test a Model Architecture
+### Design and Test a Model Architecture
 
-####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+#### 1. Preprocessing the image data.
 
 As a first step, I decided to shuffle the images to make sure the ordering of the data does not affect the training of the network.
 
-I have tried on converting images and not converting images to grayscale and sticking to colored images, and have found the results not having any significant difference. And so, I have deferred on using grayscale since some data are lost when converting to grayscale.
+I have tried on converting images to grayscale and sticking to colored images because I have found the results not having any significant difference. And so, I have deferred on using grayscale and used colored images upon proceeding to normalization to avoid data loss when converting to grayscale.
 
 Here is an example of a traffic sign image results before and after grayscaling.
 
@@ -90,16 +78,7 @@ As a last step, I normalized the image data because it helps process the data fa
 
 I decided to defer to generate additional data because the result of the validation accuracy was already 93.1%.
 
-To add more data to the the data set, I used the following techniques because ...
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ...
-
-
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+#### 2. Final model architecture.
 
 My final model consisted of the following layers:
 
@@ -121,46 +100,35 @@ My final model consisted of the following layers:
 | Dropout  		      	| keep_prob 0.5									|
 | Fully connected		| 84 array, outputs 43							|
 |						|												|
-|						|												|
 
-####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+
+#### 3. How I trained your model.
 
 To train the model, I used
 	- the softmax_cross_entropy_with_logits function to find cross_entropy with the one_hot_y and the logits as its parameters.
 	- the AdamOptimizer and the Stochastic Gradient Descent but settled with the AdamOptimizer as optimizer as it is ideal with this amount of dataset.
 	- 0.001 as initial learning rate after several trials with different learning rates.
 	- 128 as batch size as it is ideal after several trials as well.
-	- 10 as the ideal number of epochs after playing with different numbers as well.
+	- 10, 15 and 20 epochs but settled at 10 as the ideal number of epochs after playing with the different numbers.
 
-####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+#### 4. Approach taken for finding a solution and getting the validation set accuracy to be at least 0.93.
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+As a model architecture for predicting numbers with MNIST dataset, the LeNet architecture was chosen because it has already learned how to read figures. A few tweaks to customize it with the traffic sign dataset will save time for programmers from starting from scratch. These tweaks involve considering the differences on the dataset to be used, from grayscaled numbers to colored raster images, from a few thousand images to ten times the number or even more if augmentation is employed. In my model, the use of normalization, maxpool, dropout and additional channels for colored images are employed.
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
-
-
-With no pre-processing and only the basic LeNet architecture, the highest validation accuracy reached by my model is 86.6% after tweaking with the learning rate, epochs and batch size values.
+Initially, with no pre-processing and only the basic LeNet architecture, the highest validation accuracy reached by my model is 86.6% after tweaking with the learning rate, epochs and batch size values.
 
 ![First Run][image3_1]
 ![First Run][image3_2]
 
-The resulting graph shows a significant overfitting; hence, I thought of adding a dropout layer after the last RELU layer of the second fully connected activation layer. The training accuracy reached 95% and the validation accuracy reached 87.1% after 10 epochs.
+The resulting graph shows a significant overfitting; hence, I thought of adding a dropout layer right after the last RELU layer of the second fully connected activation layer. The training accuracy reached 95% and the validation accuracy reached 87.1% after 10 epochs.
 
 ![Adding First Dropout][image4_1]
 
-The overfitting was slightly resolved and so I added another one, this time after the RELU layer of the first fully connected activation layer. The training accuracy reached only 89.1% and the validation accuracy reached only 84% but the loss plot gave a better, much tighter curve.
+Since the overfitting was slightly resolved, I added another one, this time after the RELU layer of the first fully connected activation layer. The training accuracy reached only 89.1% and the validation accuracy reached only 84% but the loss plot gave a better, much tighter curve.
 
 ![Adding Second Dropout][image4_2]
 
-I then worked on the normalization of the images for pre-processing. I tried both the normalization of the grayscaled version of the images (see above) and the colored version. I dropped the grayscaling since there was no significant difference in the result with normalized colored images. The training accuracy reached 99.1% and the validation accuracy reached 94.8% after 20 epochs.
+I then worked on the normalization of the images for pre-processing. I tried both the normalization of the grayscaled version of the images (see Pre-processing above) and the colored version. I dropped the grayscaling since there was no significant difference in the result with normalized colored images. The training accuracy reached 99.1% and the validation accuracy reached 94.8% after 20 epochs.
 
 ![Normalization after 20 Epochs][image5_1]
 
@@ -171,13 +139,9 @@ My final model results were:
 
 ![Normalization after 10 Epochs][image5_2]
 
+### Test a Model on New Images
 
-
-###Test a Model on New Images
-
-####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
-
-Here are five German traffic signs that I found on the web:
+#### 1. Here are five German traffic signs that I found on the web:
 
 ![alt text][image6]
 
@@ -200,7 +164,7 @@ The fourth image should be easy to classify because it is very similar to the im
 The fifth image should be difficult to classify because of the few number of sample images in the training data but for some reason, the model gets it right.
 
 
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+#### 2. Model's predictions on the new traffic signs.
 
 Here are the results of the prediction:
 
@@ -215,11 +179,10 @@ Here are the results of the prediction:
 
 The model was able to correctly guess 2 of the 5 traffic signs, which gives an accuracy of 40%. The accuracy on the test set of the model is 92.7% which is more than twice the model's guess accuracy.
 
-####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+#### 3. Certainty of the model when predicting on each of the five new images.
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 25th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
 | Probability         	|     Prediction	        					|
 |:---------------------:|:---------------------------------------------:|
@@ -230,11 +193,3 @@ For the first image, the model is relatively sure that this is a stop sign (prob
 | .925				    | Slippery Road      							|
 
 ![Softmax Probabilities for the 5 Web Images][image11]
-
-
-For the second image ...
-
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
-
-
