@@ -1,6 +1,6 @@
 # Traffic Sign Recognition
 
-## Writeup Template
+## Writeup
 
 **Build a Traffic Sign Recognition Project**
 ---
