@@ -36,9 +36,10 @@ The goals / steps of this project are the following:
 
 ## Rubric Points
 ### Files Submitted
-[iPython Notebook](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/Traffic_Sign_Classifier.ipynb)
-[iPython Notebook HTML version](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/Traffic_Sign_Classifier.ipynb)
-[Writeup](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/writeup.md)
+
+* [iPython Notebook](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/Traffic_Sign_Classifier.ipynb)
+* [iPython Notebook HTML version](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/Traffic_Sign_Classifier.ipynb)
+* [Project Writeup](https://github.com/jinglebot/Classifying_Traffic_Signs/blob/master/writeup.md)
 
 ---
 ### Writeup / README
@@ -55,7 +56,7 @@ The goals / steps of this project are the following:
 * The shape of a traffic sign image is (32, 32, 3).
 * The number of unique classes/labels in the data set is 43.
 
-#### 2. Here is an exploratory visualization of the data set. It is a bar chart showing how the data is distributed among the sign classes.
+#### 2. Here is an exploratory visualization of the data set. It is a bar chart showing how the data is distributed among the 43 sign classes.
 
 ![Dataset Visualization][image1]
 
@@ -67,14 +68,14 @@ As a first step, I decided to shuffle the images to make sure the ordering of th
 
 I have tried on converting images to grayscale and sticking to colored images because I have found the results not having any significant difference. And so, I have deferred on using grayscale and used colored images upon proceeding to normalization to avoid data loss when converting to grayscale.
 
-Here is an example of a traffic sign image results before and after grayscaling.
+Here is an example of a traffic sign accuracy results before and after grayscaling.
 
 ![Before grayscaling][image2_11]
 ![Before grayscaling][image2_12]
 ![After grayscaling][image2_21]
 ![After grayscaling][image2_22]
 
-As a last step, I normalized the image data because it helps process the data faster.
+As a last step, I normalized the images because it helps process the data faster.
 
 I decided to defer to generate additional data because the result of the validation accuracy was already 93.1%.
 
@@ -102,9 +103,10 @@ My final model consisted of the following layers:
 |						|												|
 
 
-#### 3. How I trained your model.
+#### 3. How I trained my model.
 
 To train the model, I used
+
 	- the softmax_cross_entropy_with_logits function to find cross_entropy with the one_hot_y and the logits as its parameters.
 	- the AdamOptimizer and the Stochastic Gradient Descent but settled with the AdamOptimizer as optimizer as it is ideal with this amount of dataset.
 	- 0.001 as initial learning rate after several trials with different learning rates.
@@ -128,7 +130,7 @@ Since the overfitting was slightly resolved, I added another one, this time afte
 
 ![Adding Second Dropout][image4_2]
 
-I then worked on the normalization of the images for pre-processing. I tried both the normalization of the grayscaled version of the images (see Pre-processing above) and the colored version. I dropped the grayscaling since there was no significant difference in the result with normalized colored images. The training accuracy reached 99.1% and the validation accuracy reached 94.8% after 20 epochs.
+I then worked on the normalization of the images for pre-processing. I tried both the normalization of the grayscaled version of the images (see Pre-processing above) and the colored version. I dropped the grayscaling since there was no significant difference in the result with colored images. The training accuracy reached 99.1% and the validation accuracy reached 94.8% after 20 epochs.
 
 ![Normalization after 20 Epochs][image5_1]
 
@@ -170,8 +172,8 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					|
 |:---------------------:|:---------------------------------------------:|
-| 50 km/h	      		| 30 km/h					 				|
-| 80 km/h	      		| 120 km/h					 				|
+| 50 km/h	      		| 30 km/h					 					|
+| 80 km/h	      		| 120 km/h					 					|
 | Pedestrians			| 30 km/h										|
 | Stop Sign      		| Stop sign   									|
 | Slippery Road			| Slippery Road      							|
